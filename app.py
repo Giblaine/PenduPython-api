@@ -8,5 +8,9 @@ app = Flask(__name__)
 def index():
     return "Hello!"
 
+@app.route('/mot/nouveau')
+def generateWord():
+    return "INCROYABLE"
+
 if __name__ == '__main__':
     app.run(debug=True)
