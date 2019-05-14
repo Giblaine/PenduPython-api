@@ -1,16 +1,18 @@
 #! /usr/bin/python
 # -*- coding:utf-8 -*-
 
+import functions
 from flask import Flask
+
 app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return "Hello!"
+    return "PenduAPI 1.0"
 
-@app.route('/mot/nouveau')
-def generateWord():
-    return "INCROYABLE"
+@app.route('/jeu/nouveau/<length>')
+def nouveauJeu(length):
+    return functions.nouveauJeu(length)
 
 if __name__ == '__main__':
     app.run(debug=True)
