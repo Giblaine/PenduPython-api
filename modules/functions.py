@@ -131,7 +131,7 @@ def jouer(uuid, lettre):
 
         else:
             data = {}
-            data["message"] = "Le mot ne contient pas la lettre proposée. Il vous reste " + str(jeu["coup_restant"]) + " essai(s) restant(s)"
+            data["message"] = "Le mot ne contient pas la lettre proposée. Il vous reste {0}  essai(s) restant(s)".format(str(jeu["coup_restant"]))
             data["mot"] = jeu['etat_mot']
             data["code"] = 1002
             jsonData = json.dumps(data)
@@ -155,7 +155,7 @@ def jouer(uuid, lettre):
 
         else:
             data = {}
-            data["message"] = "La lettre a bien été trouvée. Il vous reste " + str(jeu["coup_restant"]) + " essai(s) restant(s)"
+            data["message"] = "La lettre a bien été trouvée. Il vous reste {0} essai(s) restant(s)".format(str(jeu["coup_restant"]))
             data["mot"] = jeu['etat_mot']
             data["code"] = 1003
             jsonData = json.dumps(data)
