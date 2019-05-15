@@ -79,13 +79,18 @@ def jouer(uuid, lettre):
         data = {}
         data["message"] = "La partie est terminée. Vous avez perdu :( \n Le mot était : " + getMot(jeu["mot_id"])
         data["code"] = 1000
-        return json.dumps(data)
+        
+        jsonData = json.dumps(data)
+        response = Response(response=jsonData, status=200, mimetype="application/json")
+        return response
 
     if jeu['statut'] == 2:
         data = {}
         data["message"] = "La partie est terminée. Vous avez gagné :) \n Le mot était : " + getMot(jeu["mot_id"])
         data["code"] = 1000
-        return json.dumps(data)
+        jsonData = json.dumps(data)
+        response = Response(response=jsonData, status=200, mimetype="application/json")
+        return response 
 
     # On regarde si la lettre a déjà été proposée
     if getLettreTrouvee(uuid, lettre) > 0:
@@ -96,7 +101,9 @@ def jouer(uuid, lettre):
         # On décrémente la partie
         decrementePartie(uuid)
 
-        return json.dumps(data)
+        jsonData = json.dumps(data)
+        response = Response(response=jsonData, status=200, mimetype="application/json")
+        return response 
 
     mot = getMot(jeu['mot_id'])
     motSplit = list(mot)
@@ -118,14 +125,18 @@ def jouer(uuid, lettre):
             data = {}
             data["message"] = "La partie est terminée. Vous avez perdu :( \nLe mot était : " + getMot(jeu["mot_id"])
             data["code"] = 1000
-            return json.dumps(data)
+            jsonData = json.dumps(data)
+            response = Response(response=jsonData, status=200, mimetype="application/json")
+            return response 
 
         else:
             data = {}
             data["message"] = "Le mot ne contient pas la lettre proposée. Il vous reste " + str(jeu["coup_restant"]) + " essai(s) restant(s)"
             data["mot"] = jeu['etat_mot']
             data["code"] = 1002
-            return json.dumps(data)
+            jsonData = json.dumps(data)
+            response = Response(response=jsonData, status=200, mimetype="application/json")
+            return response 
 
     else:
         jeu = json.loads(getJeu(uuid))
@@ -138,14 +149,18 @@ def jouer(uuid, lettre):
             data = {}
             data["message"] = "La partie est terminée. Vous avez gagné. Le mot était : " + jeu["etat_mot"]
             data["code"] = 1000
-            return json.dumps(data)
+            jsonData = json.dumps(data)
+            response = Response(response=jsonData, status=200, mimetype="application/json")
+            return response 
 
         else:
             data = {}
             data["message"] = "La lettre a bien été trouvée. Il vous reste " + str(jeu["coup_restant"]) + " essai(s) restant(s)"
             data["mot"] = jeu['etat_mot']
             data["code"] = 1003
-            return json.dumps(data)
+            jsonData = json.dumps(data)
+            response = Response(response=jsonData, status=200, mimetype="application/json")
+            return response 
 
 def addLettre(uuid, char):
     connection = db.connect()
