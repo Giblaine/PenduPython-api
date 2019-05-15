@@ -77,7 +77,7 @@ def jouer(uuid, lettre):
     # On vérifie le statut du jeu
     if jeu['statut'] == 1:
         data = {}
-        data["message"] = "La partie est terminée. Vous avez perdu :( Le mot était : {0}.".format(getMot(jeu["mot_id"]))
+        data["message"] = "La partie est terminée. Vous avez perdu :( Le mot était : <a href='https://www.le-dictionnaire.com/definition/{0}'>{0}</a>.".format(getMot(jeu["mot_id"]))
         data["code"] = 1000
         
         jsonData = json.dumps(data)
@@ -86,7 +86,7 @@ def jouer(uuid, lettre):
 
     if jeu['statut'] == 2:
         data = {}
-        data["message"] = "La partie est terminée. Vous avez gagné :) Le mot était : {0}.".format(getMot(jeu["mot_id"]))
+        data["message"] = "La partie est terminée. Vous avez gagné :) Le mot était : <a href='https://www.le-dictionnaire.com/definition/{0}'>{0}</a>.".format(getMot(jeu["mot_id"]))
         data["code"] = 1000
         jsonData = json.dumps(data)
         response = Response(response=jsonData, status=200, mimetype="application/json")
@@ -123,7 +123,7 @@ def jouer(uuid, lettre):
 
         if jeu['coup_restant'] == 0:
             data = {}
-            data["message"] = "La partie est terminée. Vous avez perdu :( Le mot était : {0}.".format(getMot(jeu["mot_id"]))
+            data["message"] = "La partie est terminée. Vous avez perdu :( Le mot était : <a href='https://www.le-dictionnaire.com/definition/{0}'>{0}</a>.".format(getMot(jeu["mot_id"]))
             data["code"] = 1000
             jsonData = json.dumps(data)
             response = Response(response=jsonData, status=200, mimetype="application/json")
@@ -131,7 +131,7 @@ def jouer(uuid, lettre):
 
         else:
             data = {}
-            data["message"] = "Le mot ne contient pas la lettre proposée. Il vous reste {0}  essai(s) restant(s)".format(str(jeu["coup_restant"]))
+            data["message"] = "Le mot ne contient pas la lettre proposée. Il vous reste {0} essai(s) restant(s)".format(str(jeu["coup_restant"]))
             data["mot"] = jeu['etat_mot']
             data["code"] = 1002
             jsonData = json.dumps(data)
@@ -147,7 +147,7 @@ def jouer(uuid, lettre):
         if jeu["etat_mot"].count('_') == 0:
             terminePartie(uuid, 2)
             data = {}
-            data["message"] = "La partie est terminée. Vous avez gagné. Le mot était : {0}.".format(jeu["etat_mot"])
+            data["message"] = "La partie est terminée. Vous avez gagné. Le mot était : <a href='https://www.le-dictionnaire.com/definition/{0}'>{0}</a>.".format(jeu["etat_mot"])
             data["code"] = 1000
             jsonData = json.dumps(data)
             response = Response(response=jsonData, status=200, mimetype="application/json")
