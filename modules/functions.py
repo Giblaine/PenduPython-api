@@ -2,6 +2,7 @@
 # -*- coding:utf-8 -*-
 
 from modules import db
+from flask import Response
 import uuid
 import json
 
@@ -23,7 +24,9 @@ def nouveauJeu(length):
     data["statut"] = 0 # 0: EN COURS / 1: TERMINÉ
     jsonData = json.dumps(data)
 
-    return jsonData
+    response = Response(response=jsonData, status=200, mimetype="application/json")
+
+    return response
 
 def getJeu(uuid):
     connection = db.connect()
